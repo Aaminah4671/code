@@ -1,34 +1,40 @@
-import streamlit as st
+def add(x, y):
+    return x + y
 
-def convert_length(value, from_unit, to_unit):
-    conversion_factors = {
-        "Metre": 1,
-        "Centimetre": 100,
-        "Millimetre": 1000,
-        "Kilometre": 0.001,
-        "Inch": 39.3701,
-        "Foot": 3.28084,
-        "Yard": 1.09361,
-        "Mile": 0.000621371
-    }
-    
-    if from_unit in conversion_factors and to_unit in conversion_factors:
-        return value * (conversion_factors[to_unit] / conversion_factors[from_unit])
-    else:
-        return None
+def subtract(x, y):
+    return x - y
 
-st.title("Unit Converter")
+def multiply(x, y):
+    return x * y
 
-category = st.selectbox("Select Category", ["Length"])
+def divide(x, y):
+    if y == 0:
+        return "Error! Cannot divide by zero."
+    return x / y
 
-if category == "Length":
-    from_unit = st.selectbox("From", ["Metre", "Centimetre", "Millimetre", "Kilometre", "Inch", "Foot", "Yard", "Mile"])
-    to_unit = st.selectbox("To", ["Metre", "Centimetre", "Millimetre", "Kilometre", "Inch", "Foot", "Yard", "Mile"])
-    value = st.number_input("Enter Value", min_value=0.0, format="%.6f")
-    
-    if st.button("Convert"):
-        result = convert_length(value, from_unit, to_unit)
-        if result is not None:
-            st.success(f"{value} {from_unit} = {result:.6f} {to_unit}")
-        else:
-            st.error("Invalid conversion units selected.")
+print("Simple Calculator")
+print("Select operation:")
+print("1. Add")
+print("2. Subtract")
+print("3. Multiply")
+print("4. Divide")
+
+choice = input("Enter choice (1/2/3/4): ")
+
+if choice in ('1', '2', '3', '4'):
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+
+        if choice == '1':
+            print("Result:", add(num1, num2))
+        elif choice == '2':
+            print("Result:", subtract(num1, num2))
+        elif choice == '3':
+            print("Result:", multiply(num1, num2))
+        elif choice == '4':
+            print("Result:", divide(num1, num2))
+    except ValueError:
+        print("Invalid input! Please enter numbers.")
+else:
+    print("Invalid choice! Please select a valid operation.")
